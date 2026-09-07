@@ -1,0 +1,6 @@
+export * from "./shadcn-avatar-bust-sunglasses"
+export * from "./shadcn-avatar-bust"
+export * from "./shadcn-avatar-minimal"
+export * from "./shadcn-avatar-sunglasses-filled"
+export * from "./shadcn-avatar-sunglasses"
+export * from "./shadcn-avatar"

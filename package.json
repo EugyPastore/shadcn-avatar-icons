@@ -1,0 +1,18 @@
+{
+  "name": "shadcn-avatar-icons",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Six free SVG icons of the shadcn avatar on a 24x24 grid, with PNG exports and copy-paste React components.",
+  "author": "Eugenia Pastore",
+  "license": "MIT",
+  "repository": "github:EugyPastore/shadcn-avatar-icons",
+  "scripts": {
+    "optimize": "svgo --config svgo.config.mjs -f svg -o svg",
+    "build:react": "node scripts/build-react.mjs",
+    "build:images": "bash scripts/build-images.sh",
+    "build": "npm run optimize && npm run build:react && npm run build:images"
+  },
+  "devDependencies": {
+    "svgo": "^3.3.2"
+  }
+}
