@@ -30,10 +30,10 @@ shot() { # $1 html (absolute), $2 out png (absolute), $3 width, $4 height, $5 sc
 for f in svg/*.svg; do sed 's/currentColor/white/g' "$f" > "assets/dark/$(basename "$f")"; done
 
 # Banner: composed from the designer's clean PNG exports in png/512/,
-# 6 icons at 320px, 128px gaps, 96px padding -> 2752x512. Dark twin: strokes
+# 6 icons in 320px boxes, 128px gaps, 96px padding -> 2752x512. Dark twin: strokes
 # recolored white, alpha kept. Requires ImageMagick 7.
 magick png/512/shadcn-avatar-{a,b,c,d,e,f}.png -filter Lanczos -resize 320x320 \
-  -background none +smush 128 -bordercolor none -border 96 assets/preview-light.png
+  -background none -bordercolor none -border 64x0 +append -bordercolor none -border 32x96 assets/preview-light.png
 magick assets/preview-light.png -channel RGB -fill white -colorize 100 +channel assets/preview-dark.png
 
 # Social preview card, 1280x640 at 2x
