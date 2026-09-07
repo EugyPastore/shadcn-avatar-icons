@@ -1,5 +1,8 @@
 <p align="center">
-  <img alt="The six shadcn avatar icons in a row" src="assets/preview.png" width="720">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/preview-dark.png">
+    <img alt="The six shadcn avatar icons in a row" src="assets/preview.png" width="720">
+  </picture>
 </p>
 
 <h1 align="center">shadcn avatar icons</h1>
@@ -22,12 +25,12 @@
 
 | | Name | Description | Download |
 |:-:|---|---|---|
-| <img src="assets/thumbs/shadcn-avatar-a.png" width="48" alt=""> | `shadcn-avatar-a` | Face with clear glasses | [SVG](svg/shadcn-avatar-a.svg) · [PNG](png/512/shadcn-avatar-a.png) |
-| <img src="assets/thumbs/shadcn-avatar-b.png" width="48" alt=""> | `shadcn-avatar-b` | Head and shoulders, clear glasses | [SVG](svg/shadcn-avatar-b.svg) · [PNG](png/512/shadcn-avatar-b.png) |
-| <img src="assets/thumbs/shadcn-avatar-c.png" width="48" alt=""> | `shadcn-avatar-c` | Dark sunglasses with a tinted face | [SVG](svg/shadcn-avatar-c.svg) · [PNG](png/512/shadcn-avatar-c.png) |
-| <img src="assets/thumbs/shadcn-avatar-d.png" width="48" alt=""> | `shadcn-avatar-d` | Face with dark sunglasses | [SVG](svg/shadcn-avatar-d.svg) · [PNG](png/512/shadcn-avatar-d.png) |
-| <img src="assets/thumbs/shadcn-avatar-e.png" width="48" alt=""> | `shadcn-avatar-e` | Just the glasses and the mouth | [SVG](svg/shadcn-avatar-e.svg) · [PNG](png/512/shadcn-avatar-e.png) |
-| <img src="assets/thumbs/shadcn-avatar-f.png" width="48" alt=""> | `shadcn-avatar-f` | Head and shoulders, dark sunglasses | [SVG](svg/shadcn-avatar-f.svg) · [PNG](png/512/shadcn-avatar-f.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-a.png"><img src="assets/thumbs/shadcn-avatar-a.png" width="48" alt=""></picture> | `shadcn-avatar-a` | Face with clear glasses | [SVG](svg/shadcn-avatar-a.svg) · [PNG](png/512/shadcn-avatar-a.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-b.png"><img src="assets/thumbs/shadcn-avatar-b.png" width="48" alt=""></picture> | `shadcn-avatar-b` | Head and shoulders, clear glasses | [SVG](svg/shadcn-avatar-b.svg) · [PNG](png/512/shadcn-avatar-b.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-c.png"><img src="assets/thumbs/shadcn-avatar-c.png" width="48" alt=""></picture> | `shadcn-avatar-c` | Dark sunglasses with a tinted face | [SVG](svg/shadcn-avatar-c.svg) · [PNG](png/512/shadcn-avatar-c.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-d.png"><img src="assets/thumbs/shadcn-avatar-d.png" width="48" alt=""></picture> | `shadcn-avatar-d` | Face with dark sunglasses | [SVG](svg/shadcn-avatar-d.svg) · [PNG](png/512/shadcn-avatar-d.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-e.png"><img src="assets/thumbs/shadcn-avatar-e.png" width="48" alt=""></picture> | `shadcn-avatar-e` | Just the glasses and the mouth | [SVG](svg/shadcn-avatar-e.svg) · [PNG](png/512/shadcn-avatar-e.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/thumbs-dark/shadcn-avatar-f.png"><img src="assets/thumbs/shadcn-avatar-f.png" width="48" alt=""></picture> | `shadcn-avatar-f` | Head and shoulders, dark sunglasses | [SVG](svg/shadcn-avatar-f.svg) · [PNG](png/512/shadcn-avatar-f.png) |
 
 **Want everything at once?** Download the [latest release zip](https://github.com/EugyPastore/shadcn-avatar-icons/releases/latest) (SVG + PNG + React), or use **Code → Download ZIP** above.
 

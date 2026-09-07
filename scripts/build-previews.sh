@@ -1,31 +1,38 @@
 #!/usr/bin/env bash
-# Regenerates the README preview images. One image per use, no light/dark variants:
-#   assets/preview.png          banner: the six icons on a light rounded card (2752x512)
-#   assets/thumbs/*.png         table thumbnails on the same card (144x144)
-#   assets/social-preview.png   1280x640 card for the repo's social preview (rendered at 2x)
-# The card background keeps the black icons visible on GitHub's dark theme too.
+# Regenerates the README preview images, a light and a dark card for each use:
+#   assets/preview.png / preview-dark.png     banner, six icons on a rounded card (2752x512)
+#   assets/thumbs/*.png / thumbs-dark/*.png   table thumbnails on the same cards (144x144)
+#   assets/social-preview.png                 1280x640 card for the repo's social preview
+# The README picks the dark files via <picture> + prefers-color-scheme, which follows the
+# viewer's OS setting. Both variants sit on their own card, so either one stays readable.
 # Requires ImageMagick 7 (banner, thumbs) and Chrome (social card; macOS path below,
 # set CHROME=/path/to/chrome elsewhere). Run: bash scripts/build-previews.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
-CARD_FILL='#f4f4f5'; CARD_EDGE='#e4e4e7'
 ICONS=(png/512/shadcn-avatar-{a,b,c,d,e,f}.png)
 
-# Banner: six 320px boxes, 128px gaps, 96px padding -> 2752x512, on a rounded card
-magick "${ICONS[@]}" -filter Lanczos -resize 320x320 +repage \
-  -background none -bordercolor none -border 64x0 +repage +append -bordercolor none -border 32x96 +repage "$TMP/row.png"
-magick -size 2752x512 xc:none -fill "$CARD_FILL" -stroke "$CARD_EDGE" -strokewidth 2 \
-  -draw "roundrectangle 1,1 2750,510 40,40" "$TMP/row.png" -gravity center -composite +repage assets/preview.png
-
-# Table thumbnails: 144x144 card with the icon at 100px (displayed at 48px in the README)
-mkdir -p assets/thumbs
-for f in "${ICONS[@]}"; do
-  magick -size 144x144 xc:none -fill "$CARD_FILL" -stroke "$CARD_EDGE" -strokewidth 1.5 \
-    -draw "roundrectangle 1,1 142,142 22,22" \( "$f" -filter Lanczos -resize 100x100 +repage \) \
-    -gravity center -composite +repage "assets/thumbs/$(basename "$f")"
-done
+# theme name, card fill, card edge, banner output, thumbs dir, stroke recolor (empty = keep black)
+build_theme() {
+  local fill=$2 edge=$3 banner=$4 thumbs=$5 recolor=$6
+  local rc=(); [ -n "$recolor" ] && rc=(-channel RGB -fill "$recolor" -colorize 100 +channel)
+  # Banner: six 320px boxes, 128px gaps, 96px padding -> 2752x512
+  magick "${ICONS[@]}" -filter Lanczos -resize 320x320 +repage \
+    -background none -bordercolor none -border 64x0 +repage +append -bordercolor none -border 32x96 +repage \
+    ${rc[@]+"${rc[@]}"} "$TMP/row-$1.png"
+  magick -size 2752x512 xc:none -fill "$fill" -stroke "$edge" -strokewidth 2 \
+    -draw "roundrectangle 1,1 2750,510 40,40" "$TMP/row-$1.png" -gravity center -composite +repage "$banner"
+  # Thumbnails: 144x144 card, icon at 100px (displayed at 48px in the README)
+  mkdir -p "$thumbs"
+  for f in "${ICONS[@]}"; do
+    magick -size 144x144 xc:none -fill "$fill" -stroke "$edge" -strokewidth 1.5 \
+      -draw "roundrectangle 1,1 142,142 22,22" \( "$f" -filter Lanczos -resize 100x100 +repage ${rc[@]+"${rc[@]}"} \) \
+      -gravity center -composite +repage "$thumbs/$(basename "$f")"
+  done
+}
+build_theme light '#f4f4f5' '#e4e4e7' assets/preview.png      assets/thumbs      ''
+build_theme dark  '#161b22' '#30363d' assets/preview-dark.png assets/thumbs-dark white
 
 # Social preview card, 1280x640 at 2x, rendered from the SVGs with headless Chrome
 icons_html() { # $1 = px per icon, $2 = gap px -> the six svgs inline, in a row
