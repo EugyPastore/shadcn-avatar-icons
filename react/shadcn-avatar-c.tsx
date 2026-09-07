@@ -1,12 +1,12 @@
 import * as React from "react"
 
-export type ShadcnAvatarSunglassesFilledProps = React.SVGProps<SVGSVGElement> & {
+export type ShadcnAvatarCProps = React.SVGProps<SVGSVGElement> & {
   /** Width and height in px (default 24). Tailwind classes such as `size-6` work too. */
   size?: number | string
 }
 
-/** shadcn avatar icon: Face with dark sunglasses and a tinted face. */
-export function ShadcnAvatarSunglassesFilled({ size = 24, ...props }: ShadcnAvatarSunglassesFilledProps) {
+/** shadcn avatar icon C: Dark sunglasses with a tinted face. */
+export function ShadcnAvatarC({ size = 24, ...props }: ShadcnAvatarCProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

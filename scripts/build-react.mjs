@@ -9,12 +9,12 @@ const SVG_DIR = fileURLToPath(new URL("../svg/", import.meta.url));
 const OUT_DIR = fileURLToPath(new URL("../react/", import.meta.url));
 
 const DESCRIPTIONS = {
-  "shadcn-avatar": "Face with clear glasses.",
-  "shadcn-avatar-sunglasses": "Face with dark sunglasses.",
-  "shadcn-avatar-sunglasses-filled": "Face with dark sunglasses and a tinted face.",
-  "shadcn-avatar-bust": "Head and shoulders, clear glasses.",
-  "shadcn-avatar-bust-sunglasses": "Head and shoulders, dark sunglasses.",
-  "shadcn-avatar-minimal": "Just the glasses and the mouth.",
+  "shadcn-avatar-a": "Face with clear glasses.",
+  "shadcn-avatar-b": "Head and shoulders, clear glasses.",
+  "shadcn-avatar-c": "Dark sunglasses with a tinted face.",
+  "shadcn-avatar-d": "Face with dark sunglasses.",
+  "shadcn-avatar-e": "Just the glasses and the mouth.",
+  "shadcn-avatar-f": "Head and shoulders, dark sunglasses.",
 };
 
 const toPascal = (s) => s.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
@@ -44,7 +44,7 @@ export type ${component}Props = React.SVGProps<SVGSVGElement> & {
   size?: number | string
 }
 
-/** shadcn avatar icon: ${DESCRIPTIONS[name] ?? name} */
+/** shadcn avatar icon ${name.slice(-1).toUpperCase()}: ${DESCRIPTIONS[name] ?? name} */
 export function ${component}({ size = 24, ...props }: ${component}Props) {
   return (
     <svg

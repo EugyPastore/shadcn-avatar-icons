@@ -9,8 +9,8 @@
   "scripts": {
     "optimize": "svgo --config svgo.config.mjs -f svg -o svg",
     "build:react": "node scripts/build-react.mjs",
-    "build:images": "bash scripts/build-images.sh",
-    "build": "npm run optimize && npm run build:react && npm run build:images"
+    "build:previews": "bash scripts/build-previews.sh",
+    "build": "npm run optimize && npm run build:react && npm run build:previews"
   },
   "devDependencies": {
     "svgo": "^3.3.2"
