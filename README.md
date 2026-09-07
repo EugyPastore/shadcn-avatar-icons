@@ -68,7 +68,7 @@ export function Example() {
 
 ### PNG
 
-[`png/`](png) has every icon at 128, 256, 512 and 1024 px, black on a transparent background.
+[`png/`](png) has every icon at 128, 256 and 512 px, black on a transparent background, exported from the original design file.
 Handy for avatars, Slack, Notion, Figma or anywhere SVG is not an option.
 
 ## Design notes
@@ -82,7 +82,7 @@ Handy for avatars, Slack, Notion, Figma or anywhere SVG is not an option.
 
 ```
 svg/       optimized SVG sources, start here
-png/       PNG exports at 128 / 256 / 512 / 1024 px
+png/       PNG exports at 128 / 256 / 512 px
 react/     one self-contained React component per icon (TSX)
 assets/    README previews
 scripts/   build scripts: SVG → React and SVG → README previews
