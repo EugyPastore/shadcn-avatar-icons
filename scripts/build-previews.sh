@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenerates the README preview images from svg/*.svg:
 #   assets/dark/*.svg         white copies for GitHub dark mode
-#   assets/preview-*.png      banner, light and dark
+#   assets/preview-*.png      banner, light and dark (from assets/banner/*.png)
 #   assets/social-preview.png 1280x640 card for the repo's social preview
 # Rendering uses headless Chrome for proper curve anti-aliasing. macOS path
 # below; set CHROME=/path/to/chrome elsewhere. Run: bash scripts/build-previews.sh
@@ -29,15 +29,12 @@ shot() { # $1 html (absolute), $2 out png (absolute), $3 width, $4 height, $5 sc
 
 for f in svg/*.svg; do sed 's/currentColor/white/g' "$f" > "assets/dark/$(basename "$f")"; done
 
-# Banner: 6 icons at 160px, 64px gaps, 48px padding -> 1376x256, rendered at 2x
-for theme in black white; do
-  cat > "$TMP/banner-$theme.html" <<HTML
-<!doctype html><meta charset="utf-8"><body style="margin:0;background:transparent">
-<div style="display:flex;padding:48px;color:$theme">$(icons_html 160 64)</div>
-HTML
-  out=assets/preview-light.png; [ "$theme" = white ] && out=assets/preview-dark.png
-  shot "$TMP/banner-$theme.html" "$PWD/$out" 1376 256 2
-done
+# Banner: composed from the designer's PNG exports in assets/banner/ (with keyline guides),
+# 6 icons at 320px, 128px gaps, 96px padding -> 2752x512. Dark twin: black strokes become
+# white, the gray guides stay as they are. Requires ImageMagick 7.
+magick assets/banner/shadcn-avatar-{a,b,c,d,e,f}.png -filter Lanczos -resize 320x320 \
+  -background none +smush 128 -bordercolor none -border 96 assets/preview-light.png
+magick assets/preview-light.png -channel RGB +level-colors 'white,gray(112)' +channel assets/preview-dark.png
 
 # Social preview card, 1280x640 at 2x
 cat > "$TMP/social.html" <<HTML
